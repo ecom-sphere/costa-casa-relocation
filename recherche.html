@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moteur de recherche · Costa Casa Relocation Alicante</title>
+<meta name="description" content="Générez des recherches pré-filtrées idealista et Fotocasa pour trouver une location longue durée dans la région d'Alicante : budget, chambres, animaux acceptés, piscine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23e8a800' d='M12 3 2 12h3v8h6v-6h2v6h6v-8h3z'/></svg>">
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a class="logo" href="index.html">
+      <svg width="26" height="26" viewBox="0 0 24 24"><path fill="#e8a800" d="M12 3 2 12h3v8h6v-6h2v6h6v-8h3z"/></svg>
+      COSTA<span>CASA</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#zones">Zones</a>
+      <a href="recherche.html">Moteur de recherche</a>
+      <a href="dossier-raphael.html">Cas pratique</a>
+      <a class="nav-cta" href="index.html#contact">Lancer ma recherche</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <div class="crumb"><a href="index.html">Accueil</a> / Moteur de recherche</div>
+    <h1>Moteur de recherche <em>multi-portails</em></h1>
+    <p>Choisissez vos critères : nous générons les recherches pré-filtrées exactes sur idealista et Fotocasa, les deux portails de référence en Espagne. Structures d'URL vérifiées en juillet 2026.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="tool">
+      <div class="tool-grid">
+        <div class="field">
+          <label for="zone">Zone</label>
+          <select id="zone">
+            <option value="el-campello-alicante|el-campello" selected>El Campello (lycée français)</option>
+            <option value="mutxamel-alicante|mutxamel">Mutxamel</option>
+            <option value="san-juan-de-alicante-alicante|sant-joan-d-alacant">Sant Joan d'Alacant</option>
+            <option value="alicante-alacant-alicante|alicante-alacant">Alicante ville (Playa San Juan...)</option>
+            <option value="busot-alicante|busot">Busot</option>
+            <option value="la-villajoyosa-vila-joiosa-alicante|villajoyosa-la-vila-joiosa">Villajoyosa</option>
+            <option value="finestrat-alicante|finestrat">Finestrat</option>
+            <option value="la-nucia-alicante|la-nucia">La Nucia</option>
+            <option value="alfaz-del-pi-alicante|l-alfas-del-pi">Alfaz del Pi / Albir</option>
+            <option value="altea|altea">Altea</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="budget">Budget max / mois</label>
+          <select id="budget">
+            <option value="1500">1 500 €</option>
+            <option value="1800">1 800 €</option>
+            <option value="2000" selected>2 000 €</option>
+            <option value="2200">2 200 €</option>
+            <option value="2500">2 500 €</option>
+            <option value="0">Sans limite</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="type">Type de bien</label>
+          <select id="type">
+            <option value="chalets" selected>Maisons / chalets uniquement</option>
+            <option value="">Tous types (maisons + appartements)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rooms">Chambres minimum</label>
+          <select id="rooms">
+            <option value="dos">2 chambres et +</option>
+            <option value="tres" selected>3 chambres et +</option>
+            <option value="cuatro-cinco">4 chambres et +</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sort">Trier par</label>
+          <select id="sort">
+            <option value="fecha-publicacion-desc" selected>Annonces les plus récentes</option>
+            <option value="precios-asc">Prix croissant</option>
+            <option value="precios-desc">Prix décroissant</option>
+          </select>
+        </div>
+      </div>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="mascotas" checked> Animaux acceptés</label>
+        <label class="check"><input type="checkbox" id="larga" checked> Longue durée uniquement</label>
+        <label class="check"><input type="checkbox" id="jardin"> Jardin</label>
+        <label class="check"><input type="checkbox" id="terraza"> Terrasse</label>
+        <label class="check"><input type="checkbox" id="piscina"> Piscine</label>
+        <label class="check"><input type="checkbox" id="amueblado"> Meublé</label>
+      </div>
+      <div class="tool-actions">
+        <button class="btn btn-gold" onclick="generate()">Générer mes recherches</button>
+        <button class="btn btn-ghost" style="color:var(--navy);border-color:var(--line)" onclick="openPriority()">Ouvrir les 3 zones prioritaires d'un coup</button>
+      </div>
+      <div class="result-links" id="results"></div>
+      <p class="note">Astuce : sur chaque recherche idealista, créez une alerte e-mail (« Crear alerta »). Sur ce marché, les biens correspondants partent en 24 à 72 h : l'alerte instantanée est votre meilleur outil. Le filtre « longue durée » écarte la plupart des baux saisonniers de temporada, mais vérifiez toujours le type de contrat dans l'annonce.</p>
+    </div>
+
+    <div class="callout">
+      <h3>Comment nous utilisons ces recherches</h3>
+      <ul>
+        <li>Veille quotidienne sur les 3 zones cœur de cible (El Campello, Mutxamel, Sant Joan) avec alertes instantanées.</li>
+        <li>Chaque bien repéré est qualifié : type de bail, clause animaux, état réel, quartier, avant de vous être présenté.</li>
+        <li>Dossier locataire envoyé dans l'heure sur les biens chauds : sur ce marché, la vitesse fait la différence.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div><b style="color:#fff">COSTA<span style="color:var(--gold)">CASA</span></b> · Relocation Costa Blanca</div>
+    <div><a href="index.html">Accueil</a> · <a href="dossier-raphael.html">Cas pratique</a> · <a href="index.html#contact">Contact</a></div>
+    <div>Formats d'URL portails vérifiés juillet 2026.</div>
+  </div>
+</footer>
+
+<script>
+function buildUrls(){
+  const [ideSlug, fotoSlug] = document.getElementById('zone').value.split('|');
+  const budget = document.getElementById('budget').value;
+  const type = document.getElementById('type').value;
+  const rooms = document.getElementById('rooms').value;
+  const sort = document.getElementById('sort').value;
+  const opts = ['mascotas','larga','jardin','terraza','piscina','amueblado']
+    .reduce((o,id)=>{o[id]=document.getElementById(id).checked;return o;},{});
+
+  // idealista : /alquiler-viviendas/{slug}/con-{filtres}/
+  const f = [];
+  if (budget !== '0') f.push('precio-hasta_' + budget);
+  if (type) f.push(type);
+  f.push('de-' + rooms + (rooms==='cuatro-cinco' ? '-habitaciones-o-mas' : '-dormitorios'));
+  if (opts.mascotas) f.push('mascotas');
+  if (opts.larga) f.push('alquiler-de-larga-temporada');
+  if (opts.jardin) f.push('jardin');
+  if (opts.terraza) f.push('terraza');
+  if (opts.piscina) f.push('piscina');
+  if (opts.amueblado) f.push('amueblado');
+  const idealista = 'https://www.idealista.com/alquiler-viviendas/' + ideSlug + '/con-' + f.join(',') + '/?ordenado-por=' + sort;
+
+  // Fotocasa : /es/alquiler/{type}/{slug}/todas-las-zonas/{extras}/l?maxPrice=
+  const ftype = type === 'chalets' ? 'chalets' : 'viviendas';
+  const segs = [];
+  const nRooms = rooms === 'dos' ? '2' : rooms === 'tres' ? '3' : '4';
+  segs.push(nRooms + '-habitaciones');
+  const params = new URLSearchParams();
+  if (budget !== '0') params.set('maxPrice', budget);
+  if (sort === 'precios-asc'){ params.set('sortType','price'); params.set('sortOrderDesc','false'); }
+  if (sort === 'precios-desc'){ params.set('sortType','price'); params.set('sortOrderDesc','true'); }
+  const fotocasa = 'https://www.fotocasa.es/es/alquiler/' + ftype + '/' + fotoSlug + '/todas-las-zonas/' + segs.join('/') + '/l' + (params.toString() ? '?' + params.toString() : '');
+
+  return { idealista, fotocasa };
+}
+
+function generate(){
+  const u = buildUrls();
+  const box = document.getElementById('results');
+  box.innerHTML =
+    linkRow('idealista', 'Le portail de référence en Espagne : créez-y votre alerte e-mail', u.idealista) +
+    linkRow('Fotocasa', 'Deuxième portail : offres parfois exclusives, filtres animaux et prix à affiner sur place', u.fotocasa);
+  box.classList.add('visible');
+}
+
+function linkRow(name, desc, url){
+  return '<div class="result-link"><div><b>' + name + '</b> · ' + desc +
+    '<small>' + url + '</small></div><a href="' + url + '" target="_blank" rel="noopener">Ouvrir</a></div>';
+}
+
+function openPriority(){
+  const zones = ['el-campello-alicante','mutxamel-alicante','san-juan-de-alicante-alicante'];
+  const budget = document.getElementById('budget').value;
+  const base = 'con-' + (budget !== '0' ? 'precio-hasta_' + budget + ',' : '') + 'chalets,de-tres-dormitorios,mascotas,alquiler-de-larga-temporada';
+  zones.forEach(z => window.open('https://www.idealista.com/alquiler-viviendas/' + z + '/' + base + '/?ordenado-por=fecha-publicacion-desc', '_blank'));
+}
+</script>
+
+</body>
+</html>
